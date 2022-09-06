@@ -11,5 +11,7 @@ public class Car extends Vehicle{
 
     private Integer numberOfDoors;
 
+    public Car(){}
+
 
 }

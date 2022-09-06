@@ -13,5 +13,7 @@ public class Motorcycle extends Vehicle{
 
     private String helmetType;
 
+    public Motorcycle(){}
+
 
 }

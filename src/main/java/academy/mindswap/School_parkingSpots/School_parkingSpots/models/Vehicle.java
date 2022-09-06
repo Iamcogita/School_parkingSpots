@@ -15,6 +15,7 @@ import javax.persistence.*;
 public abstract class Vehicle {
 
     @Id
+    @GeneratedValue( strategy = GenerationType.AUTO)
     private Integer id;
     private String brand;
     private String model;
@@ -22,6 +23,8 @@ public abstract class Vehicle {
 
     @OneToOne
     private Teacher owner;
+
+    //public Vehicle(){}
 
 
 }

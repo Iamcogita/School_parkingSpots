@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class ParkingSpot {
 
     @Id
+    @GeneratedValue( strategy = GenerationType.AUTO)
     private Integer id;
 
     private Boolean isOccupied;
@@ -18,5 +19,8 @@ public class ParkingSpot {
 
     @OneToOne( mappedBy = "parkingSpot")
     private Teacher teacher;
+
+    @ManyToOne
+    private School school;
 
 }

@@ -10,7 +10,10 @@ import javax.persistence.*;
 public class Teacher {
 
     @Id
+    @GeneratedValue( strategy = GenerationType.AUTO)
     private Integer id;
+
+    private String name;
 
     @OneToOne(mappedBy = "owner")
     private Vehicle vehicle;
