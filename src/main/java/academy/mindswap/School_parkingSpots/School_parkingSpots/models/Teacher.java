@@ -10,12 +10,12 @@ import javax.persistence.*;
 public class Teacher {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
-    @OneToOne
+    @OneToOne( mappedBy = "owner")
     private Vehicle vehicle;
 
     @OneToOne
