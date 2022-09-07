@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class ParkingSpot {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE)
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Boolean isOccupied;

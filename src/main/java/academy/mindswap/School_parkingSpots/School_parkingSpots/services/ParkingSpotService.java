@@ -9,9 +9,7 @@ public class ParkingSpotService {
 
     private final ParkingSpotRepository parkingSpotRepository;
 
-    public ParkingSpotService(ParkingSpotRepository parkingSpotRepository) {
-        this.parkingSpotRepository = parkingSpotRepository;
-    }
+    public ParkingSpotService(ParkingSpotRepository parkingSpotRepository) {this.parkingSpotRepository = parkingSpotRepository;}
 
     public ParkingSpot createSpot(ParkingSpot spot){
         return parkingSpotRepository.save(spot);

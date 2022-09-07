@@ -1,7 +1,6 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,8 +14,8 @@ public class Teacher {
 
     private String name;
 
-    @OneToOne( mappedBy = "owner")
-    private Vehicle vehicle;
+    @OneToOne
+    private Vehicle personalVehicle;
 
     @OneToOne
     private ParkingSpot parkingSpot;

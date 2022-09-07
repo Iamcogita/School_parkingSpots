@@ -29,26 +29,23 @@ public class TeacherService {
 
     public Teacher getTeacher(Integer id){
         Optional<Teacher> teacher = teacherRepository.findById(id);
-        if(teacher.isEmpty()){throw new ResponseStatusException(HttpStatus.NOT_FOUND,"teacher not found");
+        if(teacher.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"teacher not found");
         }
         return teacher.get();
     }
 
     public void assignCar(Teacher teacher,Car car){
-        teacher.setVehicle(car);
-
+        teacher.setPersonalVehicle(car);
         teacherRepository.save(teacher);
     }
 
     public Teacher createTeacher(Teacher teacher){return teacherRepository.save(teacher);}
 
     public Car createCar(Car car, Integer teacherId){
-        Car carToBeReturn = carRepository.save(car);
-
         Teacher teacher = getTeacher(teacherId);
-
-        assignCar(teacher,carToBeReturn);
-
-        return carToBeReturn;
+        Car carToBeReturned = carRepository.save(car);
+        assignCar(teacher,carToBeReturned);
+        return carToBeReturned;
     }
 }

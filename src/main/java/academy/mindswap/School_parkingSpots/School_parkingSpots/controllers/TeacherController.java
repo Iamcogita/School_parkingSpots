@@ -16,7 +16,7 @@ public class TeacherController {
     @PostMapping
     public Teacher createTeacher(@RequestBody Teacher teacher){return teacherService.createTeacher(teacher);}
 
-    @PostMapping("cars/{id}")
+    @PostMapping("/cars/{id}")
     public Car createCar(@RequestBody Car car, @PathVariable Integer id){
         return teacherService.createCar(car,id);
     }
