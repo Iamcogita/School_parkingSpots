@@ -17,9 +17,6 @@ public class ParkingSpot {
 
     private String typeOfVehicle;
 
-    @OneToOne( mappedBy = "parkingSpot")
-    private Teacher teacher;
-
     @ManyToOne
     private School school;
 

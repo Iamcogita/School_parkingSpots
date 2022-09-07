@@ -15,12 +15,13 @@ public class Teacher {
 
     private String name;
 
-    @OneToOne(mappedBy = "owner")
+    @OneToOne
     private Vehicle vehicle;
 
     @OneToOne
     private ParkingSpot parkingSpot;
 
-
+    @ManyToOne
+    private School school;
 
 }

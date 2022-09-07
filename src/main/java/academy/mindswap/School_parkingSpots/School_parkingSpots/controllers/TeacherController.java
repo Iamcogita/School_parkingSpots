@@ -1,11 +1,9 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.controllers;
 
+import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Car;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.TeacherService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/teachers")
@@ -18,6 +16,15 @@ public class TeacherController {
     @PostMapping
     public Teacher createTeacher(@RequestBody Teacher teacher){return teacherService.createTeacher(teacher);}
 
+    @PostMapping("cars/{id}")
+    public Car createCar(@RequestBody Car car, @PathVariable Integer id){
+        return teacherService.createCar(car,id);
+    }
+
+    @GetMapping("/{id}")
+    public Teacher getTeacher(@PathVariable Integer id){
+        return teacherService.getTeacher(id);
+    }
 
 
 }

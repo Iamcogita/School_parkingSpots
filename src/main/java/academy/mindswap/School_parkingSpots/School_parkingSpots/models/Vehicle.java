@@ -20,11 +20,4 @@ public abstract class Vehicle {
     private String brand;
     private String model;
     private String licensePlate;
-
-    @OneToOne
-    private Teacher owner;
-
-    //public Vehicle(){}
-
-
 }
