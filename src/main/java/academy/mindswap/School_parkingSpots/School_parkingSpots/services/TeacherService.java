@@ -1,10 +1,11 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.services;
 
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Car;
+import academy.mindswap.School_parkingSpots.School_parkingSpots.models.ParkingSpot;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
-
 import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.CarRepository;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.MotorcycleRepository;
+import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.ParkingSpotRepository;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.TeacherRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,15 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
 
+    private final ParkingSpotRepository parkingSpotRepository;
+
     private final CarRepository carRepository;
 
     private final MotorcycleRepository motorcycleRepository;
 
-    public TeacherService(TeacherRepository teacherRepository, CarRepository carRepository, MotorcycleRepository motorcycleRepository) {
+    public TeacherService(TeacherRepository teacherRepository, ParkingSpotRepository parkingSpotRepository, CarRepository carRepository, MotorcycleRepository motorcycleRepository) {
         this.teacherRepository = teacherRepository;
+        this.parkingSpotRepository = parkingSpotRepository;
         this.carRepository = carRepository;
         this.motorcycleRepository = motorcycleRepository;
     }
@@ -35,12 +39,12 @@ public class TeacherService {
         return teacher.get();
     }
 
+    public Teacher createTeacher(Teacher teacher){return teacherRepository.save(teacher);}
+
     public void assignCar(Teacher teacher,Car car){
         teacher.setPersonalVehicle(car);
         teacherRepository.save(teacher);
     }
-
-    public Teacher createTeacher(Teacher teacher){return teacherRepository.save(teacher);}
 
     public Car createCar(Car car, Integer teacherId){
         Teacher teacher = getTeacher(teacherId);
@@ -48,4 +52,16 @@ public class TeacherService {
         assignCar(teacher,carToBeReturned);
         return carToBeReturned;
     }
+    public void assignSpot(Teacher teacher,ParkingSpot spot){
+        teacher.setPersonalSpot(spot);
+        teacherRepository.save(teacher);
+    }
+
+    public ParkingSpot createSpot(ParkingSpot spot , Integer teacherId){
+        Teacher teacher = getTeacher(teacherId);
+        ParkingSpot allocatedSpot = parkingSpotRepository.save(spot);
+        assignSpot(teacher , allocatedSpot);
+        return allocatedSpot;
+    }
+
 }

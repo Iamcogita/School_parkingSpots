@@ -18,7 +18,7 @@ public class Teacher {
     private Vehicle personalVehicle;
 
     @OneToOne
-    private ParkingSpot parkingSpot;
+    private ParkingSpot personalSpot;
 
     @ManyToOne
     private School school;

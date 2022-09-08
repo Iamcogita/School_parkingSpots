@@ -3,6 +3,8 @@ package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,7 @@ public abstract class Vehicle {
     private String brand;
     private String model;
     private String licensePlate;
+    private String fuelType;
 
     @JsonIgnore
     @OneToOne( mappedBy = "personalVehicle")

@@ -1,6 +1,10 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 
@@ -12,12 +16,20 @@ public class ParkingSpot {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private Boolean isOccupied;
-
     private String typeOfVehicle;
 
+    @ToString.Exclude
+    @JsonIgnoreProperties
+    @JsonIgnore
+    @OneToOne( mappedBy = "personalSpot" )
+    private Teacher reservedSpot;
+
+    @ToString.Exclude
+    @JsonIgnoreProperties
+    @JsonIgnore
     @ManyToOne
     private School school;
+
 
 }
