@@ -1,6 +1,7 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.controllers;
 
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Car;
+import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Motorcycle;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.ParkingSpot;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.TeacherService;
@@ -22,6 +23,11 @@ public class TeacherController {
     @PostMapping("/cars/{id}")
     public Car createCar(@RequestBody Car car, @PathVariable Integer id){
         return teacherService.createCar(car,id);
+    }
+
+    @PostMapping("/motorcycle/{id}")
+    public Motorcycle createMotorcycle(@RequestBody Motorcycle motorcycle, @PathVariable Integer id){
+        return teacherService.createMotorcycle(motorcycle,id);
     }
 
     @PostMapping("/spots/{id}")

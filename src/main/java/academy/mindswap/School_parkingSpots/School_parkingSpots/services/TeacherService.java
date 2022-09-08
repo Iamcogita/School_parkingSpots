@@ -1,12 +1,7 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.services;
 
-import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Car;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.models.ParkingSpot;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.CarRepository;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.MotorcycleRepository;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.ParkingSpotRepository;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.TeacherRepository;
+import academy.mindswap.School_parkingSpots.School_parkingSpots.models.*;
+import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,6 +11,7 @@ import java.util.Optional;
 @Service
 public class TeacherService {
 
+
     private final TeacherRepository teacherRepository;
 
     private final ParkingSpotRepository parkingSpotRepository;
@@ -24,11 +20,18 @@ public class TeacherService {
 
     private final MotorcycleRepository motorcycleRepository;
 
-    public TeacherService(TeacherRepository teacherRepository, ParkingSpotRepository parkingSpotRepository, CarRepository carRepository, MotorcycleRepository motorcycleRepository) {
+    private final SchoolRepository schoolRepository;
+
+    public TeacherService(TeacherRepository teacherRepository,
+                          ParkingSpotRepository parkingSpotRepository,
+                          CarRepository carRepository,
+                          MotorcycleRepository motorcycleRepository,
+                          SchoolRepository schoolRepository) {
         this.teacherRepository = teacherRepository;
         this.parkingSpotRepository = parkingSpotRepository;
         this.carRepository = carRepository;
         this.motorcycleRepository = motorcycleRepository;
+        this.schoolRepository = schoolRepository;
     }
 
     public Teacher getTeacher(Integer id){
@@ -39,7 +42,19 @@ public class TeacherService {
         return teacher.get();
     }
 
-    public Teacher createTeacher(Teacher teacher){return teacherRepository.save(teacher);}
+    public void saveTeacher(Teacher teacher){
+        Optional<School> school = schoolRepository.findById(1);
+        if(school.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"School not found");
+        }
+        school.get().addTeachers(teacher);
+        schoolRepository.save(school.get());
+    }
+
+    public Teacher createTeacher(Teacher teacher){
+        saveTeacher(teacher);
+        return teacherRepository.save(teacher);}
+
 
     public void assignCar(Teacher teacher,Car car){
         teacher.setPersonalVehicle(car);
@@ -52,6 +67,17 @@ public class TeacherService {
         assignCar(teacher,carToBeReturned);
         return carToBeReturned;
     }
+    public void assignMotorcycle(Teacher teacher, Motorcycle motorcycle){
+        teacher.setPersonalVehicle(motorcycle);
+        teacherRepository.save(teacher);
+    }
+
+    public Motorcycle createMotorcycle(Motorcycle motorcycle, Integer teacherId){
+        Teacher teacher = getTeacher(teacherId);
+        Motorcycle newMotorcycle = motorcycleRepository.save(motorcycle);
+        assignMotorcycle(teacher,newMotorcycle);
+        return newMotorcycle;
+    }
     public void assignSpot(Teacher teacher,ParkingSpot spot){
         teacher.setPersonalSpot(spot);
         teacherRepository.save(teacher);
@@ -63,5 +89,6 @@ public class TeacherService {
         assignSpot(teacher , allocatedSpot);
         return allocatedSpot;
     }
+
 
 }

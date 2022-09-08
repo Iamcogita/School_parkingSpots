@@ -1,7 +1,8 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
-import lombok.Data;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -9,8 +10,10 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @ToString
+@RequiredArgsConstructor
 @Table(name = "Schools")
 public class School {
 
@@ -18,6 +21,12 @@ public class School {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
     private String schoolName;
+
+    /*  ----------------------SEPARATOR FOR CLARITY------------------------------  */
+
+    @ToString.Exclude
+    @JsonIgnoreProperties
+    @JsonIgnore
     @OneToMany(
             cascade = {CascadeType.ALL},
             orphanRemoval = false,
@@ -30,6 +39,10 @@ public class School {
         spot.setSchool(this);
     }
 
+    /*  ----------------------SEPARATOR FOR CLARITY------------------------------  */
+    @ToString.Exclude
+    @JsonIgnoreProperties
+    @JsonIgnore
     @OneToMany(
             cascade = {CascadeType.ALL},
             orphanRemoval = false,
@@ -37,22 +50,23 @@ public class School {
     )
     private Set<Teacher> teachers;
 
-
     public void addTeachers(Teacher teacher){
         teachers.add(teacher);
         teacher.setSchool(this);
     }
 
+    /*  ----------------------SEPARATOR FOR CLARITY------------------------------  */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         School school = (School) o;
-        return id.equals(school.id) && schoolName.equals(school.schoolName) && Objects.equals(parkingSpots, school.parkingSpots) && Objects.equals(teachers, school.teachers);
+        return id != null && Objects.equals(id, school.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, schoolName, parkingSpots, teachers);
+        return getClass().hashCode();
     }
 }

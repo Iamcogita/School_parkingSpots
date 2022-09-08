@@ -2,10 +2,7 @@ package academy.mindswap.School_parkingSpots.School_parkingSpots.controllers;
 
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.School;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.SchoolService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/school")
@@ -17,4 +14,5 @@ public class SchoolController {
 
     @PostMapping
     public School createSchool(@RequestBody School school){return schoolService.createSchool(school);}
+
 }
