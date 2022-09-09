@@ -11,26 +11,21 @@ import java.util.Optional;
 @Service
 public class TeacherService {
 
-
     private final TeacherRepository teacherRepository;
 
     private final ParkingSpotRepository parkingSpotRepository;
 
-    private final CarRepository carRepository;
-
-    private final MotorcycleRepository motorcycleRepository;
+    private final VehicleRepository vehicleRepository;
 
     private final SchoolRepository schoolRepository;
 
     public TeacherService(TeacherRepository teacherRepository,
                           ParkingSpotRepository parkingSpotRepository,
-                          CarRepository carRepository,
-                          MotorcycleRepository motorcycleRepository,
+                          VehicleRepository vehicleRepository,
                           SchoolRepository schoolRepository) {
         this.teacherRepository = teacherRepository;
         this.parkingSpotRepository = parkingSpotRepository;
-        this.carRepository = carRepository;
-        this.motorcycleRepository = motorcycleRepository;
+        this.vehicleRepository = vehicleRepository;
         this.schoolRepository = schoolRepository;
     }
 
@@ -53,31 +48,21 @@ public class TeacherService {
 
     public Teacher createTeacher(Teacher teacher){
         saveTeacher(teacher);
-        return teacherRepository.save(teacher);}
+        return teacherRepository.save(teacher);
+    }
 
-
-    public void assignCar(Teacher teacher,Car car){
-        teacher.setPersonalVehicle(car);
+    public void assignVehicle(Teacher teacher,Vehicle vehicle){
+        teacher.setPersonalVehicle(vehicle);
         teacherRepository.save(teacher);
     }
 
-    public Car createCar(Car car, Integer teacherId){
+    public Vehicle createVehicle(Vehicle vehicle, Integer teacherId){
         Teacher teacher = getTeacher(teacherId);
-        Car carToBeReturned = carRepository.save(car);
-        assignCar(teacher,carToBeReturned);
-        return carToBeReturned;
-    }
-    public void assignMotorcycle(Teacher teacher, Motorcycle motorcycle){
-        teacher.setPersonalVehicle(motorcycle);
-        teacherRepository.save(teacher);
+        Vehicle newVehicle= vehicleRepository.save(vehicle);
+        assignVehicle(teacher,newVehicle);
+        return newVehicle;
     }
 
-    public Motorcycle createMotorcycle(Motorcycle motorcycle, Integer teacherId){
-        Teacher teacher = getTeacher(teacherId);
-        Motorcycle newMotorcycle = motorcycleRepository.save(motorcycle);
-        assignMotorcycle(teacher,newMotorcycle);
-        return newMotorcycle;
-    }
     public void assignSpot(Teacher teacher,ParkingSpot spot){
         teacher.setPersonalSpot(spot);
         teacherRepository.save(teacher);

@@ -16,14 +16,20 @@ public class ParkingSpot {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String typeOfParking;
     private Boolean isOccupied;
-    private String typeOfVehicle;
 
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
     @OneToOne( mappedBy = "personalSpot" )
     private Teacher reservedSpot;
+
+    @ToString.Exclude
+    @JsonIgnoreProperties
+    @JsonIgnore
+    @OneToMany( mappedBy = "motorcycleParking" )
+    private Teacher twoWheelerParking;
 
     @ToString.Exclude
     @JsonIgnoreProperties

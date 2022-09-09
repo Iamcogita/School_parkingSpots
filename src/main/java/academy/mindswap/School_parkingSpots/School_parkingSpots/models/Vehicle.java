@@ -3,7 +3,6 @@ package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
@@ -11,12 +10,7 @@ import javax.persistence.*;
 @Data
 @ToString(exclude = "owner")
 @Table(name = "Vehicles")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-        name = "vehicle_type",
-        discriminatorType = DiscriminatorType.STRING
-)
-public abstract class Vehicle {
+public class Vehicle {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -25,6 +19,7 @@ public abstract class Vehicle {
     private String model;
     private String licensePlate;
     private String fuelType;
+    private Boolean isTwoWheeler;
 
     @JsonIgnore
     @OneToOne( mappedBy = "personalVehicle")

@@ -11,14 +11,17 @@ public class Teacher {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
+    private String sensitiveData;
 
     @OneToOne
     private Vehicle personalVehicle;
 
     @OneToOne
     private ParkingSpot personalSpot;
+
+    @ManyToOne
+    private ParkingSpot motorcycleParking;
 
     @ManyToOne
     private School school;

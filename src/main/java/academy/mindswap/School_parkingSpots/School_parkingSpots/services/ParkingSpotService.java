@@ -23,6 +23,11 @@ public class ParkingSpotService {
         this.parkingSpotRepository = parkingSpotRepository;
     }
 
+    public ParkingSpot createTwoWheelerParking(ParkingSpot spot){
+        saveSpots(spot);
+        return parkingSpotRepository.save(spot);
+    }
+
     public ParkingSpot createSpot(ParkingSpot spot){
         saveSpots(spot);
         return parkingSpotRepository.save(spot);

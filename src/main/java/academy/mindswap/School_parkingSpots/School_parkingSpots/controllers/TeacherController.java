@@ -1,9 +1,8 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.controllers;
 
-import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Car;
-import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Motorcycle;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.ParkingSpot;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
+import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Vehicle;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.TeacherService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +19,11 @@ public class TeacherController {
     public Teacher createTeacher(@RequestBody Teacher teacher){
         return teacherService.createTeacher(teacher);}
 
-    @PostMapping("/cars/{id}")
-    public Car createCar(@RequestBody Car car, @PathVariable Integer id){
-        return teacherService.createCar(car,id);
+    @PostMapping("/vehicles/{id}")
+    public Vehicle createCar(@RequestBody Vehicle vehicle, @PathVariable Integer id){
+        return teacherService.createVehicle(vehicle,id);
     }
 
-    @PostMapping("/motorcycle/{id}")
-    public Motorcycle createMotorcycle(@RequestBody Motorcycle motorcycle, @PathVariable Integer id){
-        return teacherService.createMotorcycle(motorcycle,id);
-    }
 
     @PostMapping("/spots/{id}")
     public ParkingSpot createSpot(@RequestBody ParkingSpot spot, @PathVariable Integer id){
