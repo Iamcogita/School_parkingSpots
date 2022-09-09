@@ -1,6 +1,9 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
 import lombok.Data;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,4 +26,8 @@ public class Teacher {
     @ManyToOne
     private School school;
 
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
