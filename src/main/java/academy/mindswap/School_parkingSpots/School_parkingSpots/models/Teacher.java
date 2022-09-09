@@ -1,6 +1,8 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
 import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,7 +22,8 @@ public class Teacher {
     @OneToOne
     private ParkingSpot personalSpot;
 
-    @ManyToOne
+    @OneToOne
+    @ToString.Exclude
     private ParkingSpot motorcycleParking;
 
     @ManyToOne
