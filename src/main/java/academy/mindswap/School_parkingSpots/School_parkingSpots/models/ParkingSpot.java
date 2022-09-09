@@ -28,12 +28,6 @@ public class ParkingSpot {
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
-    @OneToMany( mappedBy = "motorcycleParking" )
-    private Teacher twoWheelerParking;
-
-    @ToString.Exclude
-    @JsonIgnoreProperties
-    @JsonIgnore
     @ManyToOne
     private School school;
 

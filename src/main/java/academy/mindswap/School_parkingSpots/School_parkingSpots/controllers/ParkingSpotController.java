@@ -18,13 +18,7 @@ public class ParkingSpotController {
     }
 
     @PostMapping
-    public ParkingSpot createTwoWheelerParking(@RequestBody ParkingSpot spot){
-        return parkingSpotService.createSpot(spot);
-    }
-
-    @PostMapping
     public ParkingSpot createSpot(@RequestBody ParkingSpot spot){
-
         return parkingSpotService.createSpot(spot);
     }
 

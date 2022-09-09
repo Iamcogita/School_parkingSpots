@@ -20,10 +20,9 @@ public class TeacherController {
         return teacherService.createTeacher(teacher);}
 
     @PostMapping("/vehicles/{id}")
-    public Vehicle createCar(@RequestBody Vehicle vehicle, @PathVariable Integer id){
+    public Vehicle createVehicle(@RequestBody Vehicle vehicle, @PathVariable Integer id){
         return teacherService.createVehicle(vehicle,id);
     }
-
 
     @PostMapping("/spots/{id}")
     public ParkingSpot createSpot(@RequestBody ParkingSpot spot, @PathVariable Integer id){

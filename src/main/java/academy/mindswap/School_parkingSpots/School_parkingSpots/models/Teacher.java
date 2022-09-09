@@ -21,9 +21,6 @@ public class Teacher {
     private ParkingSpot personalSpot;
 
     @ManyToOne
-    private ParkingSpot motorcycleParking;
-
-    @ManyToOne
     private School school;
 
 }
