@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.Optional;
 
 @Service
-public class TeacherService {
+public class TeacherService implements TeacherServiceImpl {
 
     private final TeacherRepository teacherRepository;
 
@@ -32,6 +32,7 @@ public class TeacherService {
         this.schoolRepository = schoolRepository;
     }
 
+    @Override
     public Teacher getTeacher(Integer id){
         Optional<Teacher> teacher = teacherRepository.findById(id);
         if(teacher.isEmpty()){
@@ -40,6 +41,7 @@ public class TeacherService {
         return teacher.get();
     }
 
+    @Override
     public void saveTeacher(Teacher teacher){
         Optional<School> school = schoolRepository.findById(1);
         if(school.isEmpty()){
@@ -49,16 +51,19 @@ public class TeacherService {
         schoolRepository.save(school.get());
     }
 
+    @Override
     public Teacher createTeacher(Teacher teacher){
         saveTeacher(teacher);
         return teacherRepository.save(teacher);
     }
 
-    public void assignVehicle(Teacher teacher,Vehicle vehicle){
+    @Override
+    public void assignVehicle(Teacher teacher, Vehicle vehicle){
         teacher.setPersonalVehicle(vehicle);
         teacherRepository.save(teacher);
     }
 
+    @Override
     public Vehicle createVehicle(Vehicle vehicle, Integer teacherId){
         Teacher teacher = getTeacher(teacherId);
         Vehicle newVehicle= vehicleRepository.save(vehicle);
@@ -66,12 +71,14 @@ public class TeacherService {
         return newVehicle;
     }
 
-    public void assignSpot(Teacher teacher,ParkingSpot spot){
+    @Override
+    public void assignSpot(Teacher teacher, ParkingSpot spot){
         teacher.setPersonalSpot(spot);
         teacherRepository.save(teacher);
     }
 
-    public ParkingSpot createSpot(ParkingSpot spot , Integer teacherId){
+    @Override
+    public ParkingSpot createSpot(ParkingSpot spot, Integer teacherId){
         Teacher teacher = getTeacher(teacherId);
         ParkingSpot allocatedSpot = parkingSpotRepository.save(spot);
         assignSpot(teacher , allocatedSpot);

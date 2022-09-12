@@ -26,8 +26,5 @@ public class Teacher {
     @ManyToOne
     private School school;
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+
 }

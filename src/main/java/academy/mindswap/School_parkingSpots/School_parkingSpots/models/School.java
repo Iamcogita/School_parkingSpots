@@ -29,7 +29,6 @@ public class School {
     @JsonIgnore
     @OneToMany(
             cascade = {CascadeType.ALL},
-            orphanRemoval = false,
             mappedBy = "school"
     )
     private Set<ParkingSpot> parkingSpots;
@@ -45,7 +44,6 @@ public class School {
     @JsonIgnore
     @OneToMany(
             cascade = {CascadeType.ALL},
-            orphanRemoval = false,
             mappedBy = "school"
     )
     private Set<Teacher> teachers;
