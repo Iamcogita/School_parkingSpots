@@ -2,14 +2,18 @@ package academy.mindswap.School_parkingSpots.School_parkingSpots.services;
 
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.*;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.repositories.*;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 import java.awt.*;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TeacherService implements TeacherServiceImpl {
@@ -85,5 +89,20 @@ public class TeacherService implements TeacherServiceImpl {
         return allocatedSpot;
     }
 
+    // testing:
+
+    public Set<Teacher> getAllTeachers(){
+        Set<Teacher> allTeachers = new HashSet<>();
+        allTeachers.addAll(teacherRepository.findAll());
+        return allTeachers ;
+    }
+
+
+    // TODO
+    //  convert to DTO
+    //  validation?
+    //  apply logger
+    //  change args with AOP
+    //  controller advice with exception handler 404
 
 }

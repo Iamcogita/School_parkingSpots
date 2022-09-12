@@ -6,6 +6,8 @@ import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Vehicle;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.TeacherService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/teachers")
 public class TeacherController {
@@ -36,6 +38,11 @@ public class TeacherController {
     @GetMapping("/{id}")
     public Teacher getTeacher(@PathVariable Integer id){
         return teacherService.getTeacher(id);
+    }
+
+    @GetMapping
+    public Set<Teacher> getAllTeachers(){
+        return teacherService.getAllTeachers();
     }
 
 
