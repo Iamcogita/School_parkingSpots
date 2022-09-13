@@ -41,24 +41,22 @@ public class TeacherService implements TeacherServiceImpl {
     @Override
     public Teacher getTeacher(Integer id){
         Optional<Teacher> teacher = teacherRepository.findById(id);
-        if(teacher.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"teacher not found");
-        }
+        if(teacher.isEmpty()){throw new ResponseStatusException(HttpStatus.NOT_FOUND,"teacher not found");}
         return teacher.get();
     }
 
     @Override
-    public Teacher saveTeacher(Teacher teacher){
+    public void saveTeacherToSchool(Teacher teacher){
         Optional<School> school = schoolRepository.findById(1);
         if(school.isEmpty()){throw new ResponseStatusException(HttpStatus.NOT_FOUND,"School not found");}
         school.get().addTeachers(teacher);
         schoolRepository.save(school.get());
-        return teacher;
     }
 
     @Override
     public Teacher createTeacher(Teacher teacher){
-        return teacherRepository.save(saveTeacher(teacher));
+        saveTeacherToSchool(teacher);
+        return teacherRepository.save(teacher);
     }
 
     @Override

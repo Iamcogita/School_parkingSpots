@@ -6,8 +6,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.*;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,27 +27,21 @@ public class School {
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
-    @OneToMany(
-            cascade = {CascadeType.ALL},
-            mappedBy = "school"
-    )
-    private List<ParkingSpot> parkingSpots;
+    @OneToMany(mappedBy = "school")
+    private Set<ParkingSpot> parkingSpots;
 
     public void addParkingSpots(ParkingSpot spot){
         parkingSpots.add(spot);
         spot.setSchool(this);
     }
 
-
     /*  ----------------------SEPARATOR FOR CLARITY------------------------------  */
+
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
-    @OneToMany(
-            cascade = {CascadeType.ALL},
-            mappedBy = "school"
-    )
-    private List<Teacher> teachers;
+    @OneToMany(mappedBy = "school")
+    private Set<Teacher> teachers;
 
     public void addTeachers(Teacher teacher){
         teachers.add(teacher);
