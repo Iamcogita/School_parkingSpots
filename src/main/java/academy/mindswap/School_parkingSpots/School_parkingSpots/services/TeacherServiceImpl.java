@@ -7,7 +7,7 @@ import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Vehicle;
 public interface TeacherServiceImpl {
     Teacher getTeacher(Integer id); // 4
 
-    void saveTeacher(Teacher teacher);
+    Teacher saveTeacher(Teacher teacher);
 
     Teacher createTeacher(Teacher teacher);  // 1
 

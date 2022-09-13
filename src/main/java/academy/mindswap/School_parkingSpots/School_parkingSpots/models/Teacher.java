@@ -1,19 +1,23 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
-import lombok.Data;
-import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Table(name= "Teachers")
 public class Teacher {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
     private String sensitiveData;
 
@@ -26,5 +30,18 @@ public class Teacher {
     @ManyToOne
     private School school;
 
+    /*  ----------------------SEPARATOR FOR CLARITY------------------------------  */
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Teacher teacher = (Teacher) o;
+        return id != null && Objects.equals(id, teacher.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

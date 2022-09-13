@@ -1,11 +1,17 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.controllers;
 
+import academy.mindswap.School_parkingSpots.School_parkingSpots.commands.TeacherDto;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.ParkingSpot;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Vehicle;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -14,8 +20,7 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
-    public TeacherController(TeacherService teacherService) {
-        this.teacherService = teacherService;}
+    public TeacherController(TeacherService teacherService) {this.teacherService = teacherService;}
 
     @PostMapping
     public Teacher createTeacher(@RequestBody Teacher teacher){
@@ -41,9 +46,10 @@ public class TeacherController {
     }
 
     @GetMapping
-    public Set<Teacher> getAllTeachers(){
-        return teacherService.getAllTeachers();
+    @Valid
+    public ResponseEntity<List<TeacherDto>> getAllTeachers() {
+        List<TeacherDto> teacherList = teacherService.getAllTeachers();
+        return new ResponseEntity<>(teacherList, HttpStatus.OK);
     }
-
 
 }

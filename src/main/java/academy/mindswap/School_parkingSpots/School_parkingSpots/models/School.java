@@ -6,8 +6,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,12 +31,13 @@ public class School {
             cascade = {CascadeType.ALL},
             mappedBy = "school"
     )
-    private Set<ParkingSpot> parkingSpots;
+    private List<ParkingSpot> parkingSpots;
 
     public void addParkingSpots(ParkingSpot spot){
         parkingSpots.add(spot);
         spot.setSchool(this);
     }
+
 
     /*  ----------------------SEPARATOR FOR CLARITY------------------------------  */
     @ToString.Exclude
@@ -46,7 +47,7 @@ public class School {
             cascade = {CascadeType.ALL},
             mappedBy = "school"
     )
-    private Set<Teacher> teachers;
+    private List<Teacher> teachers;
 
     public void addTeachers(Teacher teacher){
         teachers.add(teacher);
