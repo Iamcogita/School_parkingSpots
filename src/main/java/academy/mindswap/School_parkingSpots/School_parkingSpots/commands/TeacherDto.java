@@ -1,13 +1,8 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.commands;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import javax.validation.constraints.*;
-
 
 @Data
 @NoArgsConstructor

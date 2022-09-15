@@ -15,7 +15,7 @@ public class SchoolParkingSpotsApplication {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchoolParkingSpotsApplication.class);
 
 	public static void main(String[] args) {
-		LOGGER.info("hello world");
+		LOGGER.info("STARTING APPLICATION");
 		SpringApplication.run(SchoolParkingSpotsApplication.class, args);
 	}
 

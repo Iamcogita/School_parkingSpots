@@ -9,11 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +88,7 @@ public class TeacherService implements TeacherServiceImpl {
         return allocatedSpot;
     }
 
+    @Override
     @LogExecutionTime
     public List<TeacherDto> getAllTeachers() {
         LOGGER.info("Getting all teachers");
@@ -98,6 +97,15 @@ public class TeacherService implements TeacherServiceImpl {
                 .toList();
     }
 
+    @Override
+    public void deleteTeacher(Teacher teacher) {teacherRepository.delete(teacher);}
+
+    @Override
+    public void deleteTeacherById(Integer id){
+        Optional<Teacher> toDelete = teacherRepository.findById(id);
+        if (!toDelete.isPresent()) {throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Teacher not found");}
+        deleteTeacher(toDelete.get());
+    }
 
     // TODO
     //  convert to DTO -wip

@@ -5,14 +5,12 @@ import academy.mindswap.School_parkingSpots.School_parkingSpots.models.ParkingSp
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Teacher;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.models.Vehicle;
 import academy.mindswap.School_parkingSpots.School_parkingSpots.services.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/teachers")
@@ -43,6 +41,12 @@ public class TeacherController {
     @GetMapping("/{id}")
     public Teacher getTeacher(@PathVariable Integer id){
         return teacherService.getTeacher(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Teacher> deleteTeacher(@PathVariable Integer id){
+        teacherService.deleteTeacherById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
