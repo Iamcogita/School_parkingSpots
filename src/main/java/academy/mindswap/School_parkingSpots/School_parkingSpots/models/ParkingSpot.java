@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
 
-@Entity
+@Document
 @Data
 @Table(name = "parking_spots")
 public class ParkingSpot {
@@ -22,7 +23,7 @@ public class ParkingSpot {
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
-    @OneToOne( mappedBy = "personalSpot" )
+    @OneToOne
     private Teacher reservedSpot;
 
     @ToString.Exclude

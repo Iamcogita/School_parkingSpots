@@ -3,10 +3,11 @@ package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
-@Entity
+@Document
 @Data
 @ToString(exclude = "owner")
 @Table(name = "Vehicles")
@@ -22,6 +23,6 @@ public class Vehicle {
     private Boolean isTwoWheeler;
 
     @JsonIgnore
-    @OneToOne( mappedBy = "personalVehicle")
+    @OneToOne
     private Teacher owner;
 }

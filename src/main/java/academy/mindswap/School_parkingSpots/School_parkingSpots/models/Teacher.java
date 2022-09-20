@@ -1,9 +1,11 @@
 package academy.mindswap.School_parkingSpots.School_parkingSpots.models;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 
-@Entity
+@Document
 @Data
 @RequiredArgsConstructor
 @Table(name= "Teachers")

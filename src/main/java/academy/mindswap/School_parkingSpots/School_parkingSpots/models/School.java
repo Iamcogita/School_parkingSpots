@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+@Document
 @Getter
 @Setter
 @ToString
@@ -27,7 +28,7 @@ public class School {
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
-    @OneToMany(mappedBy = "school")
+    @OneToMany
     private Set<ParkingSpot> parkingSpots;
 
     public void addParkingSpots(ParkingSpot spot){
@@ -40,7 +41,7 @@ public class School {
     @ToString.Exclude
     @JsonIgnoreProperties
     @JsonIgnore
-    @OneToMany(mappedBy = "school")
+    @OneToMany
     private Set<Teacher> teachers;
 
     public void addTeachers(Teacher teacher){
